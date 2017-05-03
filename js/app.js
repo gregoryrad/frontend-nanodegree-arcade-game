@@ -1,9 +1,12 @@
+var canvasWidth = 550;
+
 // Enemies our player must avoid
-var Enemy = function(x,y) {
+var Enemy = function(x,y,movement) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
+    this.movement = movement;
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
@@ -17,8 +20,13 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x++;
-    this.x = this.x * dt;
-
+    if (this.x <= canvasWidth) {
+        this.x += this.movement * dt;
+    }
+    else {
+        this.x = -100; // reset position
+    }
+// TODO define collisions
 };
 
 // Draw the enemy on the screen, required method for game
@@ -32,12 +40,11 @@ Enemy.prototype.render = function() {
 var Player = function(x,y) {
     this.x = x;
     this.y = y;
-    //
     this.sprite = "images/char-boy.png";
 }
 
 Player.prototype.update = function(dt) {
-    //if..elseif statement here
+    //TODO if..elseif statement here to move player
 
 };
 
@@ -45,16 +52,6 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-var allEnemies = [];
-allEnemies.push(new Enemy(10,228));
-allEnemies.push(new Enemy(10,144));
-allEnemies.push(new Enemy(10,60));
-
-// Place the player object in a variable called player
-var player = new Player(202,404);
 
 
 // This listens for key presses and sends the keys to your
@@ -69,3 +66,19 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+
+
+// Now instantiate your objects.
+// Place all enemy objects in an array called allEnemies
+var allEnemies = [];
+allEnemies.push(new Enemy(-100,60,100));
+allEnemies.push(new Enemy(-200,60,30));
+allEnemies.push(new Enemy(-100,144,75));
+allEnemies.push(new Enemy(-300,144,30));
+allEnemies.push(new Enemy(-100,228,50));
+allEnemies.push(new Enemy(-300,228,80));
+
+
+// Place the player object in a variable called player
+var player = new Player(202,404);
