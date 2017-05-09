@@ -44,15 +44,43 @@ var Player = function(x,y) {
     this.sprite = "images/char-boy.png";
 };
 
-Player.prototype.update = function(dt) {
-    //if..elseif statement here
+Player.prototype.handleInput = function(allowedKeys) {
+    // debugger;
+    switch (allowedKeys) {
+      case 'left':
+          if (this.x > 2) {
+            this.x -= 50;
+          }
+          console.log(this.x);
+        break;
+      case 'right':
+          if (this.x < 402) {
+            this.x += 50;
+          }
+        console.log(this.x);
+        break;
+      case 'up':
+      if (this.y > -12)
+        this.y -= 42;
+        // debugger;
+        console.log(this.y);
+        break;
+      case 'down':
+        if (this.y < 408) {
+            this.y += 42;
+        }
+        console.log(this.y);
+      default:
+    }
+};
 
+Player.prototype.update = function(allowedKeys) {
+    // Player.prototype.handleInput()
 };
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
-
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -65,12 +93,13 @@ allEnemies.push(new Enemy(-100,228,50));
 allEnemies.push(new Enemy(-300,228,80));
 
 // Place the player object in a variable called player
-var player = new Player(202,404);
+var player = new Player(202,408);
 
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
+    console.log(e);
     var allowedKeys = {
         37: 'left',
         38: 'up',
@@ -78,5 +107,5 @@ document.addEventListener('keyup', function(e) {
         40: 'down'
     };
 
-    player.prototype.handleInput(allowedKeys[e.keyCode]);
+    player.handleInput(allowedKeys[e.keyCode]);
 });
