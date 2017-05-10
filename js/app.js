@@ -1,11 +1,13 @@
 var canvasWidth = 550;
 
 // Enemies our player must avoid
-var Enemy = function(x,y,movement) {
+var Enemy = function(x,y,width,height,movement) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
+    this.width = width;
+    this.height = height;
     this.movement = movement;
 
     // The image/sprite for our enemies, this uses
@@ -26,20 +28,44 @@ Enemy.prototype.update = function(dt) {
     else {
         this.x = -100; // reset position
     }
-// TODO define collisions
+    this.checkCollisions();
 };
+
+Enemy.prototype.checkCollisions = function() {
+    // debugger;
+    if (this.x < player.x + player.width &&
+        this.x + this.width > player.x &&
+        this.y < player.y + player.height &&
+        this.height + this.y > player.y) {
+        // return true;
+        alert("collision detected!!");
+    } else {
+    // return false;
+    }
+};
+
+function drawBox(x, y, width, height, color) {
+    ctx.beginPath();
+    ctx.rect(x, y, width, height);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = color;
+    ctx.stroke();
+}
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    drawBox(this.x, this.y + 77, 100, 67, "yellow");
 };
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(x,y) {
+var Player = function(x,y,width,height) {
     this.x = x;
     this.y = y;
+    this.width = width;
+    this.height = height;
     //
     this.sprite = "images/char-boy.png";
 };
@@ -49,27 +75,27 @@ Player.prototype.handleInput = function(allowedKeys) {
     switch (allowedKeys) {
       case 'left':
           if (this.x > 2) {
-            this.x -= 50;
+            this.x -= 100;
           }
-          console.log(this.x);
+          console.log("x =" + this.x + " y = " + this.y);
         break;
       case 'right':
           if (this.x < 402) {
-            this.x += 50;
+            this.x += 100;
           }
-        console.log(this.x);
+        console.log("x =" + this.x + " y = " + this.y);
         break;
       case 'up':
       if (this.y > -12)
-        this.y -= 42;
+        this.y -= 84;
         // debugger;
-        console.log(this.y);
+        console.log("x =" + this.x + " y = " + this.y);
         break;
       case 'down':
         if (this.y < 408) {
-            this.y += 42;
+            this.y += 84;
         }
-        console.log(this.y);
+        console.log("x =" + this.x + " y = " + this.y);
       default:
     }
 };
@@ -80,20 +106,22 @@ Player.prototype.update = function(allowedKeys) {
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    drawBox(this.x + 17, this.y + 62, 68, 80, "cyan");
 };
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
-allEnemies.push(new Enemy(-100,60,200));
-allEnemies.push(new Enemy(-200,60,30));
-allEnemies.push(new Enemy(-100,144,75));
-allEnemies.push(new Enemy(-300,144,30));
-allEnemies.push(new Enemy(-100,228,50));
-allEnemies.push(new Enemy(-300,228,80));
+allEnemies.push(new Enemy(-100,60,81,67,200));
+allEnemies.push(new Enemy(-200,60,81,67,30));
+allEnemies.push(new Enemy(-100,144,81,67,75));
+allEnemies.push(new Enemy(-300,144,81,67,30));
+allEnemies.push(new Enemy(-100,228,81,67,20));
+allEnemies.push(new Enemy(-300,228,81,67,80));
 
 // Place the player object in a variable called player
-var player = new Player(202,408);
+var player = new Player(202,408,61,50);
+// var player = new Player(202,408,101,171);
 
 
 // This listens for key presses and sends the keys to your
