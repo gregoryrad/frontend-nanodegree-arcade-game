@@ -1,4 +1,6 @@
 var canvasWidth = 550;
+var gotcha = new Audio();
+gotcha.src = 'sounds/monster.wav';
 
 // Enemies our player must avoid
 var Enemy = function(x,y,width,height,movement) {
@@ -12,7 +14,7 @@ var Enemy = function(x,y,width,height,movement) {
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug-grn.png';
+    this.sprite = 'images/enemy-bug-red.png';
 };
 
 // Update the enemy's position, required method for game
@@ -38,6 +40,7 @@ Enemy.prototype.checkCollisions = function() {
         this.y < player.y + player.height &&
         this.height + this.y > player.y) {
         // return true;
+        gotcha.play();
         player.reset();
     } else {
     // return false;
@@ -55,8 +58,9 @@ function drawBox(x, y, width, height, color) {
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    drawBox(this.x, this.y + 77, 100, 67, "yellow");
+    // drawBox(this.x, this.y + 77, 100, 67, "yellow");
 };
+
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -106,7 +110,7 @@ Player.prototype.update = function(allowedKeys) {
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    drawBox(this.x + 17, this.y + 62, 68, 80, "cyan");
+    // drawBox(this.x + 17, this.y + 62, 68, 80, "cyan");
 };
 
 Player.prototype.reset = function() {
@@ -126,8 +130,6 @@ allEnemies.push(new Enemy(-300,228,81,67,80));
 
 // Place the player object in a variable called player
 var player = new Player(202,408,61,50);
-// var player = new Player(202,408,101,171);
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
