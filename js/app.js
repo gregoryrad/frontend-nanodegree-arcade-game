@@ -12,7 +12,7 @@ var Enemy = function(x,y,width,height,movement) {
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
+    this.sprite = 'images/enemy-bug-grn.png';
 };
 
 // Update the enemy's position, required method for game
@@ -38,7 +38,7 @@ Enemy.prototype.checkCollisions = function() {
         this.y < player.y + player.height &&
         this.height + this.y > player.y) {
         // return true;
-        alert("collision detected!!");
+        player.reset();
     } else {
     // return false;
     }
@@ -67,7 +67,7 @@ var Player = function(x,y,width,height) {
     this.width = width;
     this.height = height;
     //
-    this.sprite = "images/char-boy.png";
+    this.sprite = "images/char-princess-girl.png";
 };
 
 Player.prototype.handleInput = function(allowedKeys) {
@@ -108,6 +108,11 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     drawBox(this.x + 17, this.y + 62, 68, 80, "cyan");
 };
+
+Player.prototype.reset = function() {
+    this.x = 202;
+    this.y =  408;
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
