@@ -1,20 +1,21 @@
 var canvasWidth = 550;
 var gotcha = new Audio();
-gotcha.src = 'sounds/monster.wav';
+gotcha.src = 'sounds/monster.wav'; // author: Bart Kelsey - https://opengameart.org/users/bart
+var win = new Audio();
+win.src = 'sounds/chipquest.wav'; // author: Bart Kelsey - https://opengameart.org/users/bart
+var footstep = new Audio();
+footstep.src = 'sounds/footstep00.ogg'; // author: Kenny - https://opengameart.org/users/kenney
 
 // Enemies our player must avoid
-var Enemy = function(x,y,width,height,movement) {
+var Enemy = function(x,y,width,height,speed,sprite) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-    this.movement = movement;
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug-red.png';
+    this.speed = speed;
+    this.sprite = sprite;
 };
 
 // Update the enemy's position, required method for game
@@ -23,12 +24,38 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x++;
-    if (this.x <= canvasWidth) {
-        this.x += this.movement * dt;
-    }
-    else {
-        this.x = -100; // reset position
+    if (this.y >= 312) {
+        this.x++;
+        if (this.x <= canvasWidth) {
+            this.x += this.speed * dt;
+        }
+        else {
+            this.x = -100; // reset position
+        }
+    } else if (this.y < 312 && this.y >= 228) {
+        this.x--;
+        if (this.x >= -100) {
+            this.x -= this.speed * dt;
+        }
+        else {
+            this.x = 650; // reset position
+        }
+    } else if (this.y < 228 && this.y >= 144) {
+        this.x++;
+        if (this.x <= canvasWidth) {
+            this.x += this.speed * dt;
+        }
+        else {
+            this.x = -100; // reset position
+        }
+    } else if (this.y < 144) {
+        this.x--;
+        if (this.x >= -100) {
+            this.x -= this.speed * dt;
+        }
+        else {
+            this.x = 650; // reset position
+        }
     }
     this.checkCollisions();
 };
@@ -71,7 +98,7 @@ var Player = function(x,y,width,height) {
     this.width = width;
     this.height = height;
     //
-    this.sprite = "images/char-princess-girl.png";
+    this.sprite = "images/char-pink-girl.png";
 };
 
 Player.prototype.handleInput = function(allowedKeys) {
@@ -80,32 +107,40 @@ Player.prototype.handleInput = function(allowedKeys) {
       case 'left':
           if (this.x > 2) {
             this.x -= 100;
+            footstep.play();
           }
-          console.log("x =" + this.x + " y = " + this.y);
+          // console.log("x =" + this.x + " y = " + this.y);
         break;
       case 'right':
           if (this.x < 402) {
             this.x += 100;
+            footstep.play();
           }
-        console.log("x =" + this.x + " y = " + this.y);
+        // console.log("x =" + this.x + " y = " + this.y);
         break;
       case 'up':
-      if (this.y > -12)
-        this.y -= 84;
-        // debugger;
-        console.log("x =" + this.x + " y = " + this.y);
+          if (this.y > -12) {
+            this.y -= 84;
+            footstep.play();
+            // debugger;
+            // console.log("x =" + this.x + " y = " + this.y);
+        }
         break;
       case 'down':
         if (this.y < 408) {
             this.y += 84;
+            footstep.play();
         }
-        console.log("x =" + this.x + " y = " + this.y);
+        // console.log("x =" + this.x + " y = " + this.y);
       default:
     }
 };
 
 Player.prototype.update = function(allowedKeys) {
-    // Player.prototype.handleInput()
+    if (player.y < 60) {
+        win.play();
+        player.reset();
+    }
 };
 
 Player.prototype.render = function() {
@@ -121,12 +156,18 @@ Player.prototype.reset = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
-allEnemies.push(new Enemy(-100,60,81,67,200));
-allEnemies.push(new Enemy(-200,60,81,67,30));
-allEnemies.push(new Enemy(-100,144,81,67,75));
-allEnemies.push(new Enemy(-300,144,81,67,30));
-allEnemies.push(new Enemy(-100,228,81,67,20));
-allEnemies.push(new Enemy(-300,228,81,67,80));
+allEnemies.push(new Enemy(-100,60,81,67,140,'images/enemy-bug-grn-rev.png'));
+allEnemies.push(new Enemy(-200,60,81,67,100,'images/enemy-bug-ylw-rev.png'));
+allEnemies.push(new Enemy(-300,60,81,67,60,'images/enemy-bug-red-rev.png'));
+allEnemies.push(new Enemy(-100,144,81,67,120,'images/enemy-bug-grn.png'));
+allEnemies.push(new Enemy(-300,144,81,67,80,'images/enemy-bug-ylw.png'));
+allEnemies.push(new Enemy(-300,144,81,67,40,'images/enemy-bug-red.png'));
+allEnemies.push(new Enemy(-100,228,81,67,100,'images/enemy-bug-grn-rev.png'));
+allEnemies.push(new Enemy(-100,228,81,67,60,'images/enemy-bug-ylw-rev.png'));
+allEnemies.push(new Enemy(-300,228,81,67,20,'images/enemy-bug-red-rev.png'));
+allEnemies.push(new Enemy(-100,312,81,67,100,'images/enemy-bug-grn.png'));
+allEnemies.push(new Enemy(-100,312,81,67,60,'images/enemy-bug-ylw.png'));
+allEnemies.push(new Enemy(-300,312,81,67,20,'images/enemy-bug-red.png'));
 
 // Place the player object in a variable called player
 var player = new Player(202,408,61,50);
