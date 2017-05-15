@@ -4,7 +4,7 @@ gotcha.src = 'sounds/monster.wav'; // author: Bart Kelsey - https://opengameart.
 var win = new Audio();
 win.src = 'sounds/chipquest.wav'; // author: Bart Kelsey - https://opengameart.org/users/bart
 var footstep = new Audio();
-footstep.src = 'sounds/footstep00.ogg'; // author: Kenny - https://opengameart.org/users/kenney
+footstep.src = 'sounds/footstep00.wav'; // author: Kenny - https://opengameart.org/users/kenney
 
 // Enemies our player must avoid
 var Enemy = function(x,y,width,height,speed,sprite) {
@@ -98,7 +98,7 @@ var Player = function(x,y,width,height) {
     this.width = width;
     this.height = height;
     //
-    this.sprite = "images/char-pink-girl.png";
+    this.sprite = "images/char-horn-girl.png";
 };
 
 Player.prototype.handleInput = function(allowedKeys) {
