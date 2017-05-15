@@ -14,7 +14,7 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 
 body {
     text-align: center;
-    background-color: mistyrose;
+    background: linear-gradient(to bottom, #fa8072 0%, #ffe4e1 100%);
 }
 
 
@@ -31,6 +31,7 @@ h1 {
     margin-bottom: 0;
 }
 
+
 h2 {
     font-size: 2.5em;
 }
@@ -43,6 +44,7 @@ h3 {
     margin: 0 0 12px 0;
 }
 
+
 h4 {
     font-size: 1.25em;
     font-family: 'Lato', sans-serif;
@@ -54,6 +56,7 @@ h4 {
     margin: 0;
 }
 
+
 ul {
     text-align: left;
     list-style: none;
@@ -62,8 +65,9 @@ ul {
 
 
 li {
-    padding: 0 0 0 20px;
+    padding: 0 0 0 80px;
 }
+
 
 .arrow {
     font-family: Baloo;
@@ -71,6 +75,7 @@ li {
     color: navy;
     text-shadow:4px 4px 0 rgba(0,0,0,0.1);
 }
+
 
 .container {
     display: flex;
@@ -84,23 +89,29 @@ li {
 
 
 .box {
-  width:300px;
-  margin:10px;
+    width:300px;
+    margin:10px;
 }
+
 
 .header {
-
+    border: solid 2px navy;
+    background: mistyrose;
 }
+
 
 .gameboard {
     width:550px;
 }
 
+
 .scoreboard {
-    border: solid 1px navy;
+    border: solid 2px navy;
+    background: mistyrose;
 }
 
 
 .howToPlay {
-
+    border: solid 2px navy;
+    background: mistyrose;
 }
