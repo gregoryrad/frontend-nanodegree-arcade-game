@@ -12,6 +12,48 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 */}
 
 
+/* Box styles */
+.container {
+    display: flex;
+    border: 10px solid salmon;
+    height: 100vh;
+    flex-wrap:wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+
+.box {
+    width:300px;
+    margin:10px;
+}
+
+
+.title {
+    border: solid 2px navy;
+    background: mistyrose;
+}
+
+
+.gameboard {
+    width:550px;
+}
+
+
+.scoreboard {
+    border: solid 2px navy;
+    background: mistyrose;
+}
+
+
+.howToPlay {
+    border: solid 2px navy;
+    background: mistyrose;
+}
+
+
+/* Text styles */
 body {
     text-align: center;
     background: linear-gradient(to bottom, #fa8072 0%, #ffe4e1 100%);
@@ -23,6 +65,11 @@ h1,h2 {
     color: navy;
     text-shadow:4px 4px 0 rgba(0,0,0,0.1);
     margin: 0 0 0 0;
+}
+
+
+h3,h4 {
+    font-family: 'Lato', sans-serif;
 }
 
 
@@ -38,7 +85,6 @@ h2 {
 
 
 h3 {
-    font-family: 'Lato', sans-serif;
     font-weight: bold;
     font-size: 2.25em;
     margin: 0 0 12px 0;
@@ -47,12 +93,11 @@ h3 {
 
 h4 {
     font-size: 1.25em;
-    font-family: 'Lato', sans-serif;
 }
 
 
 #howToPlay, h4 {
-    padding: 0;
+    padding: 0 12px;
     margin: 0;
 }
 
@@ -74,44 +119,4 @@ li {
     font-size: 1.5em;
     color: navy;
     text-shadow:4px 4px 0 rgba(0,0,0,0.1);
-}
-
-
-.container {
-    display: flex;
-    border: 10px solid salmon;
-    height: 100vh;
-    flex-wrap:wrap;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-}
-
-
-.box {
-    width:300px;
-    margin:10px;
-}
-
-
-.header {
-    border: solid 2px navy;
-    background: mistyrose;
-}
-
-
-.gameboard {
-    width:550px;
-}
-
-
-.scoreboard {
-    border: solid 2px navy;
-    background: mistyrose;
-}
-
-
-.howToPlay {
-    border: solid 2px navy;
-    background: mistyrose;
 }
