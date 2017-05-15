@@ -4,7 +4,12 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 
 
 /* Box-sizing border-box */
-* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; border: solid 1px red;}
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+/*    border: solid 1px red;
+*/}
 
 
 body {
@@ -13,7 +18,7 @@ body {
 }
 
 
-h1,h2,h3 {
+h1,h2 {
     font-family: 'Baloo', sans-serif;
     color: navy;
     text-shadow:4px 4px 0 rgba(0,0,0,0.1);
@@ -27,17 +32,19 @@ h1 {
 }
 
 h2 {
-    font-size: 3em;
+    font-size: 2.5em;
 }
 
 
 h3 {
-    font-size: 2em;
-    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 2.25em;
+    margin: 0 0 12px 0;
 }
 
 h4 {
-    font-size: 1.5em;
+    font-size: 1.25em;
     font-family: 'Lato', sans-serif;
 }
 
@@ -71,6 +78,8 @@ li {
     height: 100vh;
     flex-wrap:wrap;
     flex-direction: column;
+    justify-content: center;
+    align-content: center;
 }
 
 
@@ -88,7 +97,7 @@ li {
 }
 
 .scoreboard {
-
+    border: solid 1px navy;
 }
 
 
