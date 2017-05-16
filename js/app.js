@@ -20,8 +20,8 @@ footstep.src = 'sounds/footstep00.wav'; // author: Kenny - https://opengameart.o
 //     ctx.stroke();
 // }
 
-// Enemies our player must avoid
-var Enemy = function(x,y,width,height,speed,sprite) {
+// Enemy class for the playaer to avoid
+var Enemy = function(x, y, width, height, speed, sprite) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
@@ -32,42 +32,38 @@ var Enemy = function(x,y,width,height,speed,sprite) {
     this.sprite = sprite;
 };
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
+// This method updates the enemy's position
+// It takes a parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
+    // Any movement is multiplied by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
     if (this.y >= 312) {
         this.x++;
         if (this.x <= canvasWidth) {
             this.x += this.speed * dt;
-        }
-        else {
+        } else {
             this.x = -100; // reset position
         }
     } else if (this.y < 312 && this.y >= 228) {
         this.x--;
         if (this.x >= -100) {
             this.x -= this.speed * dt;
-        }
-        else {
+        } else {
             this.x = 650; // reset position
         }
     } else if (this.y < 228 && this.y >= 144) {
         this.x++;
         if (this.x <= canvasWidth) {
             this.x += this.speed * dt;
-        }
-        else {
+        } else {
             this.x = -100; // reset position
         }
     } else if (this.y < 144) {
         this.x--;
         if (this.x >= -100) {
             this.x -= this.speed * dt;
-        }
-        else {
+        } else {
             this.x = 650; // reset position
         }
     }
@@ -76,12 +72,10 @@ Enemy.prototype.update = function(dt) {
 
 Enemy.prototype.checkCollisions = function() {
     document.getElementById('lives').innerHTML = lives;
-    // debugger;
     if (this.x < player.x + player.width &&
         this.x + this.width > player.x &&
         this.y < player.y + player.height &&
         this.height + this.y > player.y) {
-        // return true;
         gotcha.play();
         player.reset();
         lives -= 1;
@@ -95,7 +89,6 @@ Enemy.prototype.checkCollisions = function() {
             newGame.play();
         }
     } else {
-    // return false;
     }
 };
 
@@ -110,7 +103,7 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(x,y,width,height) {
+var Player = function(x, y, width, height) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -121,37 +114,31 @@ var Player = function(x,y,width,height) {
 
 
 Player.prototype.handleInput = function(allowedKeys) {
-    // debugger;
     switch (allowedKeys) {
-      case 'left':
-          if (this.x > 2) {
-            this.x -= 100;
-            footstep.play();
-          }
-          // console.log("x =" + this.x + " y = " + this.y);
-        break;
-      case 'right':
-          if (this.x < 402) {
-            this.x += 100;
-            footstep.play();
-          }
-        // console.log("x =" + this.x + " y = " + this.y);
-        break;
-      case 'up':
-          if (this.y > -12) {
-            this.y -= 84;
-            footstep.play();
-            // debugger;
-            // console.log("x =" + this.x + " y = " + this.y);
-        }
-        break;
-      case 'down':
-        if (this.y < 408) {
-            this.y += 84;
-            footstep.play();
-        }
-        // console.log("x =" + this.x + " y = " + this.y);
-      default:
+        case 'left':
+            if (this.x > 2) {
+                this.x -= 100;
+                footstep.play();
+            }
+            break;
+        case 'right':
+            if (this.x < 402) {
+                this.x += 100;
+                footstep.play();
+            }
+            break;
+        case 'up':
+            if (this.y > -12) {
+                this.y -= 84;
+                footstep.play();
+            }
+            break;
+        case 'down':
+            if (this.y < 408) {
+                this.y += 84;
+                footstep.play();
+            }
+        default:
     }
 };
 
@@ -173,29 +160,28 @@ Player.prototype.render = function() {
 
 Player.prototype.reset = function() {
     this.x = 202;
-    this.y =  408;
+    this.y = 408;
 }
 
 // Instantiate the objects:
 
 // This assigns the enemy objects to an array called allEnemies
 var allEnemies = [];
-allEnemies.push(new Enemy(-100,60,81,67,140,'images/enemy-bug-grn-rev.png'));
-allEnemies.push(new Enemy(-200,60,81,67,100,'images/enemy-bug-ylw-rev.png'));
-allEnemies.push(new Enemy(-300,60,81,67,60,'images/enemy-bug-red-rev.png'));
-allEnemies.push(new Enemy(-100,144,81,67,120,'images/enemy-bug-grn.png'));
-allEnemies.push(new Enemy(-300,144,81,67,80,'images/enemy-bug-ylw.png'));
-allEnemies.push(new Enemy(-300,144,81,67,40,'images/enemy-bug-red.png'));
-allEnemies.push(new Enemy(-100,228,81,67,100,'images/enemy-bug-grn-rev.png'));
-allEnemies.push(new Enemy(-100,228,81,67,60,'images/enemy-bug-ylw-rev.png'));
-allEnemies.push(new Enemy(-300,228,81,67,20,'images/enemy-bug-red-rev.png'));
-allEnemies.push(new Enemy(-100,312,81,67,100,'images/enemy-bug-grn.png'));
-allEnemies.push(new Enemy(-100,312,81,67,60,'images/enemy-bug-ylw.png'));
-allEnemies.push(new Enemy(-300,312,81,67,20,'images/enemy-bug-red.png'));
+allEnemies.push(new Enemy(-100, 60, 81, 67, 140, 'images/enemy-bug-grn-rev.png'));
+allEnemies.push(new Enemy(-200, 60, 81, 67, 100, 'images/enemy-bug-ylw-rev.png'));
+allEnemies.push(new Enemy(-300, 60, 81, 67, 60, 'images/enemy-bug-red-rev.png'));
+allEnemies.push(new Enemy(-100, 144, 81, 67, 120, 'images/enemy-bug-grn.png'));
+allEnemies.push(new Enemy(-300, 144, 81, 67, 80, 'images/enemy-bug-ylw.png'));
+allEnemies.push(new Enemy(-300, 144, 81, 67, 40, 'images/enemy-bug-red.png'));
+allEnemies.push(new Enemy(-100, 228, 81, 67, 100, 'images/enemy-bug-grn-rev.png'));
+allEnemies.push(new Enemy(-100, 228, 81, 67, 60, 'images/enemy-bug-ylw-rev.png'));
+allEnemies.push(new Enemy(-300, 228, 81, 67, 20, 'images/enemy-bug-red-rev.png'));
+allEnemies.push(new Enemy(-100, 312, 81, 67, 100, 'images/enemy-bug-grn.png'));
+allEnemies.push(new Enemy(-100, 312, 81, 67, 60, 'images/enemy-bug-ylw.png'));
+allEnemies.push(new Enemy(-300, 312, 81, 67, 20, 'images/enemy-bug-red.png'));
 
 // This assigns the player object to a variable called player
-var player = new Player(202,408,61,50);
-
+var player = new Player(202, 408, 61, 50);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method.
