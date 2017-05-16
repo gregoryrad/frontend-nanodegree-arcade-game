@@ -1,5 +1,6 @@
 var canvasWidth = 550;
 var score = 0;
+var lives = 3;
 var gotcha = new Audio();
 gotcha.src = 'sounds/monster.wav'; // author: Bart Kelsey - https://opengameart.org/users/bart
 var win = new Audio();
@@ -72,6 +73,7 @@ Enemy.prototype.update = function(dt) {
 };
 
 Enemy.prototype.checkCollisions = function() {
+    document.getElementById('lives').innerHTML = lives;
     // debugger;
     if (this.x < player.x + player.width &&
         this.x + this.width > player.x &&
@@ -80,6 +82,15 @@ Enemy.prototype.checkCollisions = function() {
         // return true;
         gotcha.play();
         player.reset();
+        lives -= 1;
+        document.getElementById('lives').innerHTML = lives;
+        if (lives === 0) {
+            alert('GAME OVER!');
+            alert('New Game?');
+            score = 0;
+            document.getElementById('score').innerHTML = score;
+            lives = 3;
+        }
     } else {
     // return false;
     }

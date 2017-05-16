@@ -44,12 +44,25 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 .scoreboard {
     border: solid 2px navy;
     background: mistyrose;
-}
+/*    display: inline;
+*/}
 
 
 .howToPlay {
     border: solid 2px navy;
     background: mistyrose;
+}
+
+
+#scoreStat {
+    padding: 0 0 0 20px;
+    float: left;
+}
+
+
+#livesStat {
+    padding: 0 20px 0 0;
+    float: right;
 }
 
 
