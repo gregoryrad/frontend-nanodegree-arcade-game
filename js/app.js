@@ -1,10 +1,21 @@
 var canvasWidth = 550;
+var score = 0;
 var gotcha = new Audio();
 gotcha.src = 'sounds/monster.wav'; // author: Bart Kelsey - https://opengameart.org/users/bart
 var win = new Audio();
 win.src = 'sounds/chipquest.wav'; // author: Bart Kelsey - https://opengameart.org/users/bart
 var footstep = new Audio();
 footstep.src = 'sounds/footstep00.wav'; // author: Kenny - https://opengameart.org/users/kenney
+
+//function draws boxes used to outline enemies and player images to determine
+//sizes for checking collisions
+// function drawBox(x, y, width, height, color) {
+//     ctx.beginPath();
+//     ctx.rect(x, y, width, height);
+//     ctx.lineWidth = 2;
+//     ctx.strokeStyle = color;
+//     ctx.stroke();
+// }
 
 // Enemies our player must avoid
 var Enemy = function(x,y,width,height,speed,sprite) {
@@ -74,13 +85,6 @@ Enemy.prototype.checkCollisions = function() {
     }
 };
 
-function drawBox(x, y, width, height, color) {
-    ctx.beginPath();
-    ctx.rect(x, y, width, height);
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = color;
-    ctx.stroke();
-}
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
@@ -100,6 +104,7 @@ var Player = function(x,y,width,height) {
     //
     this.sprite = "images/char-horn-girl.png";
 };
+
 
 Player.prototype.handleInput = function(allowedKeys) {
     // debugger;
@@ -140,21 +145,26 @@ Player.prototype.update = function(allowedKeys) {
     if (player.y < 60) {
         win.play();
         player.reset();
+        score += 100;
+        document.getElementById('score').innerHTML = score;
     }
 };
+
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     // drawBox(this.x + 17, this.y + 62, 68, 80, "cyan");
 };
 
+
 Player.prototype.reset = function() {
     this.x = 202;
     this.y =  408;
 }
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
+// Instantiate the objects:
+
+// This assigns the enemy objects to an array called allEnemies
 var allEnemies = [];
 allEnemies.push(new Enemy(-100,60,81,67,140,'images/enemy-bug-grn-rev.png'));
 allEnemies.push(new Enemy(-200,60,81,67,100,'images/enemy-bug-ylw-rev.png'));
@@ -169,11 +179,12 @@ allEnemies.push(new Enemy(-100,312,81,67,100,'images/enemy-bug-grn.png'));
 allEnemies.push(new Enemy(-100,312,81,67,60,'images/enemy-bug-ylw.png'));
 allEnemies.push(new Enemy(-300,312,81,67,20,'images/enemy-bug-red.png'));
 
-// Place the player object in a variable called player
+// This assigns the player object to a variable called player
 var player = new Player(202,408,61,50);
 
+
 // This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// Player.handleInput() method.
 document.addEventListener('keyup', function(e) {
     console.log(e);
     var allowedKeys = {
