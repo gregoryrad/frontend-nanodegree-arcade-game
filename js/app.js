@@ -1,6 +1,8 @@
 var canvasWidth = 550;
 var score = 0;
 var lives = 3;
+var newGame = new Audio();
+newGame.src = 'sounds/piano.wav'; // author: Bart Kelsey - https://opengameart.org/users/bart
 var gotcha = new Audio();
 gotcha.src = 'sounds/monster.wav'; // author: Bart Kelsey - https://opengameart.org/users/bart
 var win = new Audio();
@@ -90,6 +92,7 @@ Enemy.prototype.checkCollisions = function() {
             score = 0;
             document.getElementById('score').innerHTML = score;
             lives = 3;
+            newGame.play();
         }
     } else {
     // return false;

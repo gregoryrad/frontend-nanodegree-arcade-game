@@ -180,6 +180,7 @@ var Engine = (function(global) {
         'images/char-horn-girl.png'
     ]);
     Resources.onReady(init);
+    newGame.play();
 
     /* Assign the canvas' context object to the global variable (the window
      * object when run in a browser) so that developers can use it more easily
