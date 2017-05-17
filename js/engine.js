@@ -123,6 +123,7 @@ var Engine = (function(global) {
          * and, using the rowImages array, draw the correct image for that
          * portion of the "grid"
          */
+// TODO add an if else statement for game in progress and game over
         for (row = 0; row < numRows; row++) {
             for (col = 0; col < numCols; col++) {
                 /* The drawImage function of the canvas' context element
@@ -135,7 +136,6 @@ var Engine = (function(global) {
                 ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
             }
         }
-
         renderEntities();
     }
 
@@ -152,6 +152,8 @@ var Engine = (function(global) {
         });
 
         player.render();
+// TODO add obsticle.render() method
+        // obsticle.render();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -177,7 +179,8 @@ var Engine = (function(global) {
         'images/enemy-bug-grn-rev.png',
         'images/enemy-bug-red-rev.png',
         'images/enemy-bug-ylw-rev.png',
-        'images/char-horn-girl.png'
+        'images/char-horn-girl.png',
+        'images/Rock.png'
     ]);
     Resources.onReady(init);
     newGame.play();

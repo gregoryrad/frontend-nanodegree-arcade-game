@@ -90,7 +90,7 @@ Enemy.prototype.checkCollisions = function() {
         document.getElementById('lives').innerHTML = lives;
         if (lives === 0) {
             alert('GAME OVER!');
-            alert('New Game?');
+            alert('NEW GAME?');
             score = 0;
             document.getElementById('score').innerHTML = score;
             lives = 3;
@@ -116,7 +116,6 @@ var Player = function(x, y, width, height) {
     this.y = y;
     this.width = width;
     this.height = height;
-    //
     this.sprite = "images/char-horn-girl.png";
 };
 
@@ -171,19 +170,32 @@ Player.prototype.reset = function() {
     this.y = 480;
 }
 
+
+// var Obsticle = function(x, y, width, height, sprite) {
+//     this.x = x;
+//     this.y = y;
+//     this.width = width;
+//     this.height = height;
+// }
+
+// Obsticle.prototype.render = function() {
+//     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+// }
+
+
 // Instantiate the objects:
 
 // This assigns the enemy objects to an array called allEnemies
 var allEnemies = [];
-allEnemies.push(new Enemy(-100, 60, 81, 67, 140, 'images/enemy-bug-grn-rev.png'));
-allEnemies.push(new Enemy(-200, 60, 81, 67, 100, 'images/enemy-bug-ylw-rev.png'));
-allEnemies.push(new Enemy(-300, 60, 81, 67, 60, 'images/enemy-bug-red-rev.png'));
+allEnemies.push(new Enemy(-100, 60, 81, 67, 145, 'images/enemy-bug-grn-rev.png'));
+allEnemies.push(new Enemy(-200, 60, 81, 67, 105, 'images/enemy-bug-ylw-rev.png'));
+allEnemies.push(new Enemy(-300, 60, 81, 67, 25, 'images/enemy-bug-red-rev.png'));
 allEnemies.push(new Enemy(-100, 144, 81, 67, 120, 'images/enemy-bug-grn.png'));
 allEnemies.push(new Enemy(-300, 144, 81, 67, 80, 'images/enemy-bug-ylw.png'));
 allEnemies.push(new Enemy(-300, 144, 81, 67, 40, 'images/enemy-bug-red.png'));
-allEnemies.push(new Enemy(-100, 312, 81, 67, 100, 'images/enemy-bug-grn.png'));
-allEnemies.push(new Enemy(-100, 312, 81, 67, 60, 'images/enemy-bug-ylw.png'));
-allEnemies.push(new Enemy(-300, 312, 81, 67, 20, 'images/enemy-bug-red.png'));
+allEnemies.push(new Enemy(-100, 312, 81, 67, 105, 'images/enemy-bug-grn.png'));
+allEnemies.push(new Enemy(-100, 312, 81, 67, 55, 'images/enemy-bug-ylw.png'));
+allEnemies.push(new Enemy(-300, 312, 81, 67, 35, 'images/enemy-bug-red.png'));
 allEnemies.push(new Enemy(-100, 396, 81, 67, 100, 'images/enemy-bug-grn-rev.png'));
 allEnemies.push(new Enemy(-100, 396, 81, 67, 60, 'images/enemy-bug-ylw-rev.png'));
 allEnemies.push(new Enemy(-300, 396, 81, 67, 20, 'images/enemy-bug-red-rev.png'));
@@ -193,6 +205,8 @@ allEnemies.push(new Enemy(-300, 396, 81, 67, 20, 'images/enemy-bug-red-rev.png')
 // This assigns the player object to a variable called player
 var player = new Player(202, 480, 61, 50);
 
+
+// var obsticle = new Obsticle(202, 228, 81, 67, 'images/Rock.png');
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method.
