@@ -1,6 +1,7 @@
-var canvasWidth = 550;
-var score = 0;
-var lives = 3;
+var canvasWidth = 550,
+    score = 0,
+    lives = 6
+
 var newGame = new Audio();
 newGame.src = 'sounds/piano.wav'; // author: Bart Kelsey - https://opengameart.org/users/bart
 var gotcha = new Audio();
@@ -20,7 +21,7 @@ footstep.src = 'sounds/footstep00.wav'; // author: Kenny - https://opengameart.o
 //     ctx.stroke();
 // }
 
-// Enemy class for the playaer to avoid
+// Enemy class for the player to avoid
 var Enemy = function(x, y, width, height, speed, sprite) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -38,28 +39,32 @@ Enemy.prototype.update = function(dt) {
     // Any movement is multiplied by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    if (this.y >= 312) {
-        this.x++;
-        if (this.x <= canvasWidth) {
-            this.x += this.speed * dt;
-        } else {
-            this.x = -100; // reset position
-        }
-    } else if (this.y < 312 && this.y >= 228) {
+    // determines the direction the bug should travel based on the y coordinate
+    if (this.y <= 60) {
         this.x--;
         if (this.x >= -100) {
             this.x -= this.speed * dt;
         } else {
             this.x = 650; // reset position
         }
-    } else if (this.y < 228 && this.y >= 144) {
+    // determines the direction the bug should travel based on the y coordinate
+    } else if (this.y > 61 && this.y <= 144) {
         this.x++;
         if (this.x <= canvasWidth) {
             this.x += this.speed * dt;
         } else {
             this.x = -100; // reset position
         }
-    } else if (this.y < 144) {
+    // determines the direction the bug should travel based on the y coordinate
+    } else if (this.y > 144 && this.y <= 312) {
+        this.x++;
+        if (this.x <= canvasWidth) {
+            this.x += this.speed * dt;
+        } else {
+            this.x = -100; // reset position
+        }
+    // determines the direction the bug should travel based on the y coordinate
+    } else if (this.y > 312) {
         this.x--;
         if (this.x >= -100) {
             this.x -= this.speed * dt;
@@ -70,6 +75,9 @@ Enemy.prototype.update = function(dt) {
     this.checkCollisions();
 };
 
+
+// This function defines the collision between the enemies and the player,
+// and also updates the number of lives the player has left
 Enemy.prototype.checkCollisions = function() {
     document.getElementById('lives').innerHTML = lives;
     if (this.x < player.x + player.width &&
@@ -160,7 +168,7 @@ Player.prototype.render = function() {
 
 Player.prototype.reset = function() {
     this.x = 202;
-    this.y = 408;
+    this.y = 480;
 }
 
 // Instantiate the objects:
@@ -173,15 +181,18 @@ allEnemies.push(new Enemy(-300, 60, 81, 67, 60, 'images/enemy-bug-red-rev.png'))
 allEnemies.push(new Enemy(-100, 144, 81, 67, 120, 'images/enemy-bug-grn.png'));
 allEnemies.push(new Enemy(-300, 144, 81, 67, 80, 'images/enemy-bug-ylw.png'));
 allEnemies.push(new Enemy(-300, 144, 81, 67, 40, 'images/enemy-bug-red.png'));
-allEnemies.push(new Enemy(-100, 228, 81, 67, 100, 'images/enemy-bug-grn-rev.png'));
-allEnemies.push(new Enemy(-100, 228, 81, 67, 60, 'images/enemy-bug-ylw-rev.png'));
-allEnemies.push(new Enemy(-300, 228, 81, 67, 20, 'images/enemy-bug-red-rev.png'));
 allEnemies.push(new Enemy(-100, 312, 81, 67, 100, 'images/enemy-bug-grn.png'));
 allEnemies.push(new Enemy(-100, 312, 81, 67, 60, 'images/enemy-bug-ylw.png'));
 allEnemies.push(new Enemy(-300, 312, 81, 67, 20, 'images/enemy-bug-red.png'));
+allEnemies.push(new Enemy(-100, 396, 81, 67, 100, 'images/enemy-bug-grn-rev.png'));
+allEnemies.push(new Enemy(-100, 396, 81, 67, 60, 'images/enemy-bug-ylw-rev.png'));
+allEnemies.push(new Enemy(-300, 396, 81, 67, 20, 'images/enemy-bug-red-rev.png'));
+
+
 
 // This assigns the player object to a variable called player
-var player = new Player(202, 408, 61, 50);
+var player = new Player(202, 480, 61, 50);
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method.
