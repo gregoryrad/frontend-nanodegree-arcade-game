@@ -21,6 +21,7 @@ footstep.src = 'sounds/footstep00.wav'; // author: Kenny - https://opengameart.o
 //     ctx.stroke();
 // }
 
+
 // Enemy class for the player to avoid
 var Enemy = function(x, y, width, height, speed, sprite) {
     this.x = x;
@@ -31,6 +32,7 @@ var Enemy = function(x, y, width, height, speed, sprite) {
     this.sprite = sprite;
 };
 
+
 // This method updates the enemy's position
 // It takes a parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
@@ -38,6 +40,7 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     // Determines the direction the bug should travel based on the y position
+    // and resets the enemy to its starting point
     if (this.y <= 60) {
         this.x--;
         if (this.x >= -100) {
@@ -71,8 +74,6 @@ Enemy.prototype.update = function(dt) {
 };
 
 
-
-
 // This function defines the collision between the enemies and the player,
 // and also updates the number of lives the player has left
 Enemy.prototype.checkCollisions = function() {
@@ -99,17 +100,14 @@ Enemy.prototype.checkCollisions = function() {
 };
 
 
-
-// Draw the enemy on the screen, required method for game
+// This draws the enemy on the screen
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     // drawBox(this.x, this.y + 77, 100, 67, "yellow");
 };
 
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// Player class
 var Player = function(x, y, width, height) {
     this.x = x;
     this.y = y;
@@ -118,7 +116,7 @@ var Player = function(x, y, width, height) {
     this.sprite = "images/char-horn-girl.png";
 };
 
-
+// This is a method for controlling the position of the player based on keyboard input
 Player.prototype.handleInput = function(allowedKeys) {
     switch (allowedKeys) {
         case 'left':
@@ -148,6 +146,7 @@ Player.prototype.handleInput = function(allowedKeys) {
     }
 };
 
+// This is a method for updating the player score
 Player.prototype.update = function(allowedKeys) {
     if (player.y < 60) {
         win.play();
@@ -157,29 +156,17 @@ Player.prototype.update = function(allowedKeys) {
     }
 };
 
-
+// This draws the player on the screen
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     // drawBox(this.x + 17, this.y + 62, 68, 80, "cyan");
 };
 
-
+// This resets the player to the starting position
 Player.prototype.reset = function() {
     this.x = 202;
     this.y = 480;
 }
-
-
-// var Obsticle = function(x, y, width, height, sprite) {
-//     this.x = x;
-//     this.y = y;
-//     this.width = width;
-//     this.height = height;
-// }
-
-// Obsticle.prototype.render = function() {
-//     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-// }
 
 
 // Instantiate the objects:
@@ -204,8 +191,6 @@ allEnemies.push(new Enemy(-300, 396, 81, 67, 20, 'images/enemy-bug-red-rev.png')
 // This assigns the player object to a variable called player
 var player = new Player(202, 480, 61, 50);
 
-
-// var obsticle = new Obsticle(202, 228, 81, 67, 'images/Rock.png');
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method.
