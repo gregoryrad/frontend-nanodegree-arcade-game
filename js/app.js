@@ -1,6 +1,6 @@
 var canvasWidth = 550,
     score = 0,
-    lives = 6
+    lives = 3;
 
 var newGame = new Audio();
 newGame.src = 'sounds/piano.wav'; // author: Bart Kelsey - https://opengameart.org/users/bart
@@ -11,8 +11,8 @@ win.src = 'sounds/chipquest.wav'; // author: Bart Kelsey - https://opengameart.o
 var footstep = new Audio();
 footstep.src = 'sounds/footstep00.wav'; // author: Kenny - https://opengameart.org/users/kenney
 
-//function draws boxes used to outline enemies and player images to determine
-//sizes for checking collisions
+// function draws boxes used to outline enemies and player images to determine
+// sizes for checking collisions
 // function drawBox(x, y, width, height, color) {
 //     ctx.beginPath();
 //     ctx.rect(x, y, width, height);
@@ -23,8 +23,6 @@ footstep.src = 'sounds/footstep00.wav'; // author: Kenny - https://opengameart.o
 
 // Enemy class for the player to avoid
 var Enemy = function(x, y, width, height, speed, sprite) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
     this.x = x;
     this.y = y;
     this.width = width;
@@ -39,7 +37,7 @@ Enemy.prototype.update = function(dt) {
     // Any movement is multiplied by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    // determines the direction the bug should travel based on the y coordinate
+    // Determines the direction the bug should travel based on the y position
     if (this.y <= 60) {
         this.x--;
         if (this.x >= -100) {
@@ -47,7 +45,6 @@ Enemy.prototype.update = function(dt) {
         } else {
             this.x = 650; // reset position
         }
-    // determines the direction the bug should travel based on the y coordinate
     } else if (this.y > 61 && this.y <= 144) {
         this.x++;
         if (this.x <= canvasWidth) {
@@ -55,7 +52,6 @@ Enemy.prototype.update = function(dt) {
         } else {
             this.x = -100; // reset position
         }
-    // determines the direction the bug should travel based on the y coordinate
     } else if (this.y > 144 && this.y <= 312) {
         this.x++;
         if (this.x <= canvasWidth) {
@@ -63,7 +59,6 @@ Enemy.prototype.update = function(dt) {
         } else {
             this.x = -100; // reset position
         }
-    // determines the direction the bug should travel based on the y coordinate
     } else if (this.y > 312) {
         this.x--;
         if (this.x >= -100) {
@@ -76,10 +71,13 @@ Enemy.prototype.update = function(dt) {
 };
 
 
+
+
 // This function defines the collision between the enemies and the player,
 // and also updates the number of lives the player has left
 Enemy.prototype.checkCollisions = function() {
     document.getElementById('lives').innerHTML = lives;
+    // debugger;
     if (this.x < player.x + player.width &&
         this.x + this.width > player.x &&
         this.y < player.y + player.height &&
@@ -99,6 +97,7 @@ Enemy.prototype.checkCollisions = function() {
     } else {
     }
 };
+
 
 
 // Draw the enemy on the screen, required method for game
