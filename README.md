@@ -1,15 +1,12 @@
 # frontend-nanodegree-arcade-game #
-===============================
 
 ## About this project ##
 
 This project was completed as part of the requirements for the Udacity Front-end Developer Nanodegree Program. It was built with **object-oriented JavaScript** using classes and class prototype functions.
 
-===============================
 
 ## About this game ##
 
-===============================
 
 ### General Description ###
 
@@ -31,10 +28,7 @@ This is a game based on the classic *Frogger* arcade game. The object of the gam
 2. Navigate to the water at the top of the screen while avoiding the enemies
 3. You get 100 points for each time you make it to the water. How high can you get?
 
-===============================
 
 ## Credits ##
 
 This game was created for the the Udacity Front-end Developer Nanodegree Program using a game engine supplied by Udacity. It was created and customized by Gregory Radcliffe. Sound effects were licensed under [Creative Commons](http://creativecommons.org/licenses/by/3.0/) and were created by [Bart Kelsey](https://opengameart.org/users/bart)</a> and [Kenny](https://opengameart.org/users/kenney).
-
-===============================
