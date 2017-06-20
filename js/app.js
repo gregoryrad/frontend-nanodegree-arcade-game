@@ -1,4 +1,4 @@
-var canvasWidth = 550,
+var CANVAS_WIDTH = 550,
     score = 0,
     lives = 3;
 
@@ -50,14 +50,14 @@ Enemy.prototype.update = function(dt) {
         }
     } else if (this.y > 61 && this.y <= 144) {
         this.x++;
-        if (this.x <= canvasWidth) {
+        if (this.x <= CANVAS_WIDTH) {
             this.x += this.speed * dt;
         } else {
             this.x = -100; // reset position
         }
     } else if (this.y > 144 && this.y <= 312) {
         this.x++;
-        if (this.x <= canvasWidth) {
+        if (this.x <= CANVAS_WIDTH) {
             this.x += this.speed * dt;
         } else {
             this.x = -100; // reset position
@@ -148,7 +148,7 @@ Player.prototype.handleInput = function(allowedKeys) {
 
 // This is a method for updating the player score
 Player.prototype.update = function(allowedKeys) {
-    if (player.y < 60) {
+    if (this.y < 60) {
         win.play();
         player.reset();
         score += 100;
@@ -171,7 +171,7 @@ Player.prototype.reset = function() {
 
 // Instantiate the objects:
 
-// This assigns the enemy objects to an array called allEnemies
+// This assigns the new Enemy constructor to an array called allEnemies
 var allEnemies = [];
 allEnemies.push(new Enemy(-100, 60, 81, 67, 145, 'images/enemy-bug-grn-rev.png'));
 allEnemies.push(new Enemy(-200, 60, 81, 67, 105, 'images/enemy-bug-ylw-rev.png'));
@@ -188,7 +188,7 @@ allEnemies.push(new Enemy(-300, 396, 81, 67, 20, 'images/enemy-bug-red-rev.png')
 
 
 
-// This assigns the player object to a variable called player
+// This assigns the new Player constructor to a variable called player
 var player = new Player(202, 480, 61, 50);
 
 
