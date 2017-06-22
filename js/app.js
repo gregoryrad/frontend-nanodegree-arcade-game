@@ -142,6 +142,7 @@ Player.prototype.handleInput = function(allowedKeys) {
                 this.y += 84;
                 footstep.play();
             }
+            break;
         default:
     }
 };
@@ -150,7 +151,7 @@ Player.prototype.handleInput = function(allowedKeys) {
 Player.prototype.update = function(allowedKeys) {
     if (this.y < 60) {
         win.play();
-        player.reset();
+        this.reset();
         score += 100;
         document.getElementById('score').innerHTML = score;
     }
@@ -166,7 +167,7 @@ Player.prototype.render = function() {
 Player.prototype.reset = function() {
     this.x = 202;
     this.y = 480;
-}
+};
 
 
 // Instantiate the objects:
